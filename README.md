@@ -2,7 +2,7 @@
 
 ### Some research on Recycling Infrastructures CAD/CAM/CAE
 
-While getting ready, visit (Russian):
+While I'm getting ready, you can visit (Russian):
 
 * http://help-in.ru/node/87
 * https://vk.com/iiehs
