@@ -9,7 +9,7 @@ While I'm getting ready, you can visit (Russian):
 
 
 
-<table border="0" cellpadding="0" cellspacing="0" class="MsoTableGrid"><tbody><tr><td>
+<table border="0" cellpadding="0" cellspacing="0" style="background-color:white"><tbody><tr><td>
 <p><a href="https://orcid.org/0000-0002-7501-3119" rel="nofollow"><img id="Рисунок 1" src="/img/sci-logos/image001.png" style="height:15px; width:15px"></a> <a href="https://orcid.org/0000-0002-7501-3119" rel="nofollow"><img id="Рисунок 12" src="/img/sci-logos/image002.jpg" style="height:16px; width:47px"></a></p>
 </td>
 <td>
@@ -118,3 +118,4 @@ While I'm getting ready, you can visit (Russian):
 <p>Personal site</p>
 </td>
 </tr></tbody></table>
+
