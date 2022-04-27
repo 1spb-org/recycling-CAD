@@ -5,7 +5,7 @@
 *
 **/
 
-// additional parameter. Ask me what it is.
+// additional parameter. Ask me what is it.
 _aco = '';
 	
 var center2 = [59.9715, 30.3205]; // САПР ИР в ЛЭТИ
