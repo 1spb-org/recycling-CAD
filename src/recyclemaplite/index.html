@@ -1,0 +1,186 @@
+<!DOCTYPE HTML>
+<html>
+<head lang="ru">
+<meta charset="UTF-8" />
+<title>Карта раздельного сбора</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="color-scheme" content="light">
+<meta property="og:site_name" content="Карта раздельного сбора в Санкт-Петербурге и не только
+" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://xn--1-otblt.xn--p1ai/map" />
+<meta property="og:title" content="Карта раздельного сбора в Санкт-Петербурге и не только" />
+
+<meta property="og:image" content="//xn--1-otblt.xn--p1ai/map/img/logo.png" />
+<meta property="og:image:type" content="image/png" />
+<meta property="og:image:width" content="1920" />
+<meta property="og:image:height" content="1080" />
+<link rel="shortcut icon" href="recycle.svg" type="image/svg+xml" />
+<!-- <script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+-->
+<script src="./lib/jquery.min.js"></script>
+<script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script>
+<link rel="stylesheet" href="./style.css?ver3.27" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css" />
+<script src="https://maps.api.2gis.ru/2.0/cluster_realworld.js"></script>
+<script src="./togeojson.js"></script>
+<script src="./lib/linkify.min.js"></script>
+<script src="./lib/linkify-string.min.js"></script>
+<script src="./app.js?ver5.55"></script>
+</head>
+<body onload="onLoad()"> 
+<div id="map"></div> 
+<div id="info">
+<div class="box">
+	<a class="button" href="#popup3">Меню</a>
+</div>
+</div> 
+
+<div id="popup3" class="overlay">
+	<div class="popup">
+   <h2>RecycleMap Lite</h2>
+    <a class="close" href="#">&times;</a>
+	<div class="content">
+	<h4>Карта раздельного сбора в Санкт-Петербурге и не только</h4>
+	<ul class="mainmenu">
+	<li><a class="button" href="#popup5">Выбрать город</a></li> 
+	<li><a class="button" href="#popup2">Хочу сдать...</a></li> 
+	<li><a class="button" onclick="javascript:geoLocateOnce()" 
+	title="Геолокация. Показать моё местоположение">Где я?</a></li>
+    <li><a class="button" href="#popup1">Больше...</a></li>
+	<li><a class="button" href="#popup4">Дополнения</a></li>
+	</ul>
+	</div>
+	</div>
+</div> 
+
+
+<div id="popup4" class="overlay">
+	<div class="popup">
+   <h2>RecycleMap Lite</h2>
+    <a class="close" href="#">&times;</a>
+	<div class="content">
+	<h4>Дополнения</h4>
+	<ul>
+    <li><a class="button" href="./#adm-rno:yes" target="_blank">РНО, заявки, Адмиралтейский район</a></li> 
+    <li class="ex-f">
+	  <h4>Добавить сюда данные карты Google Maps*</h4>
+	  <form action="./" method="get">
+	   <label for="o-kml-uri">Ссылка на публичную карту Google:</label><br>
+	   <input id="o-kml-uri" type="text" name="kml-uri"/>
+	   <button type="submit">Добавить</button><br>
+	   <input id="o-kml-groups" type="checkbox" name="clustered-kml-uri"/>
+	   <label for="o-kml-groups">Группировать маркеры</label>
+	   </form>
+	   <a title="Ссылка на текущую карту с импортированными данными" id="o-current-kml"></a>
+	   <div class="attn">*Внимание! Отправляя ссылку Вы подтверждаете,
+	        что импортируемые данные не нарушают законодательство РФ.</div>
+    </li> 
+	</ul>
+	</div>
+	</div>
+</div> 
+
+<div id="popup5" class="overlay">
+	<div class="popup">
+   <h2>RecycleMap Lite</h2>
+    <a class="close" href="#">&times;</a>
+	<div class="content">
+	<h4>Выбрать город</h4>
+	<select id="o-cities" size="10">
+	</select>
+	</div>
+	</div>
+</div> 
+
+<div id="popup2" class="overlay">
+	<div class="popup">
+   <h2>Фильтр</h2>
+    <a class="close" href="#">&times;</a>
+	<div class="trash_type content">
+					<div class="trash_type_title">Выберите, что хотите сдать:</div>
+					<a href="#" data-id="1" style="background-image: url(img/trash/trash1.png);" 
+					class="" title="Бумага"></a>
+					<a href="#" data-id="2" style="background-image: url(img/trash/trash2.png);"
+					 class="" title="Стекло"></a>
+					 <a href="#" data-id="3" style="background-image: url(img/trash/trash3.png);"
+					 class="" title="Пластик"></a>
+					 <a href="#" data-id="4" style="background-image: url(img/trash/trash4.png);" 
+					 class="" title="Металл"></a>
+					 <a href="#" data-id="5" style="background-image: url(img/trash/trash5.png);" 
+					 class="" title="Одежда"></a>
+					 <a href="#" data-id="6" style="background-image: url(img/trash/trash6.png);" 
+					 class="" title="Иное"></a>
+					 <a href="#" data-id="7" style="background-image: url(img/trash/trash7.png);" 
+					 class="" title="Опасные отходы"></a>
+					 <a href="#" data-id="8" style="background-image: url(img/trash/trash8.png);" 
+					 class="" title="Батарейки"></a>
+					 <a href="#" data-id="9" style="background-image: url(img/trash/trash9.png);" 
+					 class="" title="Лампочки"></a>
+					 <a href="#" data-id="10" style="background-image: url(img/trash/trash10.png);"
+					 class="" title="Бытовая техника"></a>
+					 <a href="#" data-id="11" style="background-image: url(img/trash/trash11.png);" 
+					 class="" title="Тетра Пак"></a>
+					 <a href="#" data-id="12" style="background-image: url(img/trash/trash12.png);" 
+					 class="" title="Крышечки"></a>
+					 <a href="#" data-id="13" style="background-image: url(img/trash/trash13.png);"
+					  class="" title="Шины"></a>
+					 <a href="#" data-id="1000" style="background-image: url(img/trash/trash1000.png);"
+					  class="" title="Сразу всё выбранное"></a>		
+   <span id="o-trash-legend"></span>			
+   </div>
+	
+</div>
+</div> 
+
+
+<div id="popup1" class="overlay">
+	<div class="popup">
+		<h2>RecycleMap Lite</h2>
+		<a class="close" href="#">&times;</a>
+		<div class="content">
+		<h4>Карта раздельного сбора в Санкт-Петербурге</h4>
+<h4>Геолокация: где я?</h4>
+<ul>
+<li><a class="button" 
+		onclick="javascript:geoLocateOnce()" title="Показать">Показать</a></li>
+<li><a class="button" 
+		onclick="javascript:geoLocate()" title="Показывать">Отслеживать и показывать</a></li>
+<li><a class="button" 
+ onclick="javascript:map.stopLocate()" title="Остановить отслеживание">Остановить отслеживание</a></li>
+</ul>
+<h4>Дополнения</h4>
+
+<ul>	
+<li><a href="https://сми1.рф/map/#adm-rno:yes">Заявки на РНО в Адмиралтейском районе</a></li>
+</ul>
+
+<h4>О разработке</h4>
+
+<ul>	
+<li>Разработка <a href="https://1spb.org">1spb.org</a>, <a href="https://iehs.ru">IIEHS / МИИЭБЧ</a></li>
+<li>Данные и дизайн частично от <a href="https://recyclemap.ru/spb" target="_blank">#Recyclemap</a></li>
+</ul>
+<span class="le">Все права защищены</span> 
+
+<h4>Ссылки</h4>
+
+<ul>	
+<li><a href="https://сми1.рф" target="_blank">Поддержите инициативы на РОИ!</a></li>
+<li><a href="./bike.php" target="_top">Велодорожки в СПб!</a></li>
+<li><a href="https://1spb.org/pkk.php" target="_top">Публичная кадастровая карта</a></li>
+<li><a href="https://vk.com/jorge" target="_blank">Связь с разработчиком</a></li>
+<li><a href="https://vk.com/recyclemap" target="_blank">ВКонтакте: Recyclemap Unofficial Fan Club</a></li>
+</ul>
+
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

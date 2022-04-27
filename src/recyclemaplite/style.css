@@ -1,0 +1,225 @@
+
+body
+{
+margin:0;
+padding:0;
+font-family:Arial, sans-serif;	
+}
+
+a, a:hover, a:visited {color:#007943; text-decoration:none }
+
+#map { width: 100%; height: 100%; position:absolute !important; }
+
+#info { font-size:2.1rem; padding:3px;  position:fixed;  bottom: 7px;  left:9px; z-index:9999; }
+
+ul.mainmenu li { padding: 1rem 0; font-size:2.1rem; list-style: none; }
+
+.map-popup a {text-decoration: none}
+.map-popup img {  width:81px;height:auto }
+.map-popup h2 a, .map-popup a {color:#0F0 !important }
+.map-popup h2 { margin: 0; font-size: 16px; color: #0F0; }
+
+.box { 
+  margin: 0 auto;
+  background: rgba(255,255,255,0.2);
+  padding: 3px; 
+  border-radius: 6px;
+  text-align: center;
+}
+
+.button {
+ padding: 3px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+}
+.button:hover {
+  background: #FFF; 
+  border-radius: 6px;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+  overflow: auto;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  /* transition: all 5s ease-in-out;*/
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Arial, sans-serif;
+  font-weight: normal;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 43px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    
+  }
+  .popup{
+    width: 77%;
+  }
+}
+
+
+/* From recyclemap.ru: trash legend and filter */
+
+.trash_type
+{
+	font-size: 0;
+	text-align:left;
+	margin: 15px 0px;
+}
+
+.trash_type_title
+{
+	font-size: 15px;
+	color:#333333;
+	text-transform:uppercase;
+	font-weight: 700;
+	padding-bottom: 10px;
+}
+
+.point_fractions.trash_type
+{
+	text-align:left;
+	margin: 15px -20px;
+	padding: 0px 20px;
+	border-bottom: 1px solid #e8e8e8;
+}
+
+.trash_type a, .trash_type > span
+{
+	font-size: 10px;
+	font-weight: 300;
+	display:inline-block;
+	vertical-align:top;
+	width: 53px;
+	height: 53px;
+
+	margin: 5px 4px;
+	text-align:center;
+	-webkit-border-radius: 27px;
+	-moz-border-radius: 27px;
+	border-radius: 27px;
+	
+	background-position: 0px 0px;
+}
+
+.trash_type a
+{
+	background-position: 0px -53px;
+}
+
+.trash_type a.active
+{
+	background-position: 0px 0px;
+}
+
+.trash_type a span, .trash_type > span span 
+{
+	display:none;
+}
+
+.sm_trash_type > span, .sm_trash_type > a 
+{
+	width: 30px;
+	height: 30px;
+	background-size: 30px 60px;
+	background-position: 0px 0px;
+}
+
+#o-trash-legend
+{
+ height:53px;
+ vertical-align:middle;
+ padding-top:17px;
+ width: 240px;
+ font-size: 14px;
+}
+
+#popup1 ul li
+{
+ line-height:1.31em;
+}
+
+/* map: */
+
+#map .leaflet-popup-content-wrapper
+{ 
+ background-color: rgba(50,50,50,.9) !important;
+}
+
+
+#map .leaflet-popup-content-wrapper a 
+{color:#0F0 !important;}
+#map .leaflet-popup-content-wrapper a:hover
+{color:white !important;}
+#map .leaflet-popup-content-wrapper a:visited
+{color:#0E6 !important;}
+
+
+.clu-div
+{
+ padding: 3px;
+ width:41px;
+ height:41px;
+ border-radius:20px;
+ background-color:#c00;
+ text-align:center;
+ font-size: 30px;
+}
+
+.ex-f form label,
+.ex-f form button,
+.ex-f form input,
+.ex-f form a, 
+.ex-f form div
+{
+ font-size:0.89em;
+ margin:5px 0px;
+}
+
+#o-cities 
+{
+ font-size: 21px;
+ font-weight: 700;
+ text-transform:uppercase;
+}
