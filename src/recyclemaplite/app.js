@@ -7,12 +7,41 @@
 
 // additional parameter. Ask me what is it.
 _aco = '';
+
+
+var _stg = null
+
+try { 
+_stg = window.localStorage; 
+} catch(e) {}
+
+function fnSetCity(s)
+{
+ _City = s;
+  try { _stg.setItem('rmcity', s); } catch (e) { console.error('Couldnt store current City');  }
+}
+
+
+$(document).ready(function ()
+{
+    try {
+        s = _stg.getItem('rmcity');
+        _City = s; 
+        fnSetCity(_City);
+    }
+    catch (e) { console.error('Couldnt set stored City'); }
+});
+ 
+
+// var center2 = [59.8, 30.3]; // ВПП Пулково
+// var center2 = [59.92, 30.33]; // Витебский вокзал
 	
 var center2 = [59.9715, 30.3205]; // САПР ИР в ЛЭТИ
 var centerT = [59.9715, 30.3205]; // САПР ИР в ЛЭТИ
 var zoom2 = 16;
 var _City = 2;
 var _Cities = null;
+var _useLoc = false;
   
 
 var map; 
@@ -144,6 +173,9 @@ function SecondStep(cities)
    if(_markerId != null) CreateMap();
   });  
   
+  
+  fnSetCity(_City);
+  
   if(_admRNO)
    jQuery.get('https://сми1.рф/map/rno-adm.php', GetMarkersRNOAdm);
   else if(_kmlGoogleMID != null)
@@ -191,8 +223,11 @@ function ProcessCities()
   });
   
   var gc = _Cities.find(x => x.id == _City);
-  if(gc != null)
-     center2 = [gc.lat, gc.lng];
+  if(gc != null && !_useLoc)
+  {
+      center2 = [gc.lat, gc.lng];
+      // console.log("CC " + center2);
+  }
   
   oc.change(function () 
   {
@@ -207,6 +242,7 @@ function ProcessCities()
 
 function CreateMap()
 { 
+  // console.log("Creating map " + center2);
    map = DG.map('map', { center: center2, zoom: zoom2});   
    map.on('moveend', OnMapMoveEnd );
 }
@@ -217,7 +253,12 @@ function uriLookup()
   if(L.length > 0)
   {
    var g = lookupLoc( L );
-   if(g != null) {  center2 = g.point;  zoom2 = g.zoom; }
+   if(g != null) 
+    {  
+      center2 = g.point;  zoom2 = g.zoom;
+     _useLoc = true;
+    // console.log(g);
+    }
    return;
   }
   var L = tryLookup('#city:');  
@@ -416,8 +457,8 @@ function lookupLoc(loc)
    ApplyCatsByLoc();
   
    var newurl = NewUrl(lat, lng, zoom);
-   //console.log(newurl);
-   //console.log({point:[lat,lng]});
+  // console.log(newurl);
+  // console.log({point:[lat,lng]});
    window.history.replaceState({path:newurl},'',newurl);
 
    return { point:[lat, lng], zoom:zoom};
@@ -603,6 +644,5 @@ if(_dataLoadedRNOAdm == null)
    console.log(e);
   }
 }
-  
- 
+
 		
